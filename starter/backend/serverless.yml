@@ -38,7 +38,6 @@ functions:
         Resource:
           - "*"
 
-  # TODO: Configure this function
   GetTodos:
     handler: src/lambda/http/getTodos.handler
     events:
@@ -63,7 +62,7 @@ functions:
           - xray:PutTelemetryRecords
         Resource:
           - '*'
-  # TODO: Configure this function
+
   CreateTodo:
     handler: src/lambda/http/createTodo.handler
     events:
@@ -84,7 +83,6 @@ functions:
         Resource:
           - '*'
 
-  # TODO: Configure this function
   UpdateTodo:
     handler: src/lambda/http/updateTodo.handler
     events:
@@ -109,7 +107,6 @@ functions:
         Resource:
           - '*'
 
-  # TODO: Configure this function
   DeleteTodo:
     handler: src/lambda/http/deleteTodo.handler
     events:
@@ -130,7 +127,6 @@ functions:
         Resource:
           - "*"
 
-  # TODO: Configure this function
   GenerateUploadUrl:
     handler: src/lambda/http/generateUploadUrl.handler
     events:
@@ -158,7 +154,6 @@ functions:
 
 resources:
   Resources:
-    # TODO: Add any necessary AWS resources
     GatewayResponseDefault4XX:
       Type: 'AWS::ApiGateway::GatewayResponse'
       Properties:
