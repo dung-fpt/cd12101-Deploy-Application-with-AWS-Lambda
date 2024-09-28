@@ -1,39 +1,15 @@
 import { createLogger } from '../../utils/logger.mjs'
 import { getUserId } from '../utils.mjs'
-import AWS from 'aws-sdk';
-import AWSXRay from 'aws-xray-sdk'
+import { updateTodo } from "../../service/TodoService.js"
 
 const logger = createLogger('updateTodo');
-const XAWS = AWSXRay.captureAWS(AWS);
-const dynamoDB = new XAWS.DynamoDB.DocumentClient();
+
 export async function handler(event) {
   const todoId = event.pathParameters.todoId
   const updatedTodo = JSON.parse(event.body)
 
   const userId = getUserId(event)
-
-   const item = {
-          userId: userId,
-          todoId: todoId,
-          ...updatedTodo
-      }
-
-    await dynamoDB.update({
-                TableName: process.env.TODOS_TABLE,
-                Key: {
-                    todoId,
-                    userId
-                },
-                UpdateExpression: 'set #name = :name, createdAt = :createdAt, done = :done',
-                ExpressionAttributeValues: {
-                    ':name': updatedTodo.name,
-                    ':createdAt': updatedTodo.dueDate,
-                    ':done': updatedTodo.done
-                },
-                ExpressionAttributeNames: {
-                    '#name': 'name'
-                }
-            }).promise();
+  await updateTodo(userId, todoId, updatedTodo)
 
   return {
       statusCode: 200,

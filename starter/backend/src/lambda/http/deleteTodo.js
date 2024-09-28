@@ -1,31 +1,14 @@
 import { createLogger } from "../../utils/logger.mjs"
-import AWS from 'aws-sdk';
-import AWSXRay from 'aws-xray-sdk'
 import { getUserId } from '../utils.mjs'
+import { deleteTodo  } from "../../service/TodoService.js"
 
 
 const logger = createLogger('deleteTodo');
-
-const XAWS = AWSXRay.captureAWS(AWS);
-const dynamoDB = new XAWS.DynamoDB.DocumentClient();
-
 export async function handler(event) {
   const todoId = event.pathParameters.todoId
   const userId = getUserId(event)
 
-   logger.info(`Deleting todo ${todoId} for user ${userId}`)
-      const item = {
-          userId: userId,
-          todoId: todoId
-      }
-
-   await dynamoDB.delete({
-               TableName: process.env.TODOS_TABLE,
-               Key: {
-                   todoId,
-                   userId
-               }
-           }).promise();
+  const result = await deleteTodo(userId, todoId)
 
   return {
           statusCode: 200,
@@ -34,7 +17,7 @@ export async function handler(event) {
                 'Access-Control-Allow-Credentials': true
               },
           body: JSON.stringify({
-            data: item
+            data: result
           })
         }
 }
