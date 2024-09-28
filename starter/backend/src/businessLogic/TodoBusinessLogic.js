@@ -1,12 +1,12 @@
-import { TodoRepository } from "../repository/TodoRepository.js"
+import { TodoDataLayer } from "../dataLayer/TodoDataLayer.js"
 import { v4 as uuidv4 } from "uuid"
 import AWS from 'aws-sdk';
 import AWSXRay from 'aws-xray-sdk'
 
-const repository = new TodoRepository();
+const dataLayer = new TodoDataLayer();
 
 export async function getTodos(userId) {
-    return await repository.getTodos(userId)
+    return await dataLayer.getTodos(userId)
 }
 
 export async function createTodo(userId, createdTodo) {
@@ -20,7 +20,7 @@ export async function createTodo(userId, createdTodo) {
       ...createdTodo
     }
 
-    await repository.createTodo(newTodo)
+    await dataLayer.createTodo(newTodo)
     return newTodo
 }
 
@@ -31,7 +31,7 @@ export async function updateTodo(userId, todoId, updatedTodo) {
         ...updatedTodo
     }
 
-    await repository.updateTodo(userId, todoId, item)
+    await dataLayer.updateTodo(userId, todoId, item)
     return item
 }
 
@@ -41,7 +41,7 @@ export async function deleteTodo(userId, todoId) {
         todoId: todoId
     }
 
-    await repository.deleteTodo(todoId, userId)
+    await dataLayer.deleteTodo(todoId, userId)
     return item
 }
 
@@ -61,5 +61,5 @@ export async function getPreSignedUrl(todoId) {
 
 export async function updateImage(todoId, userId, imageUrl) {
 
-    await repository.updateImage(todoId, userId, imageUrl)
+    await dataLayer.updateImage(todoId, userId, imageUrl)
 }

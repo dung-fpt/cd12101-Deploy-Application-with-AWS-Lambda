@@ -1,7 +1,7 @@
 import { getUserId } from '../utils.mjs'
 import { v4 as uuidv4 } from "uuid"
 import { createLogger } from '../../utils/logger.mjs'
-import { updateImage, getPreSignedUrl  } from "../../service/TodoService.js"
+import { updateImage, getPreSignedUrl  } from "../../businessLogic/TodoBusinessLogic.js"
 
 const logger = createLogger('generateUpload');
 export async function handler(event) {

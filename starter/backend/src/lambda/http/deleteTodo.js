@@ -1,6 +1,6 @@
 import { createLogger } from "../../utils/logger.mjs"
 import { getUserId } from '../utils.mjs'
-import { deleteTodo  } from "../../service/TodoService.js"
+import { deleteTodo  } from "../../businessLogic/TodoBusinessLogic.js"
 
 
 const logger = createLogger('deleteTodo');

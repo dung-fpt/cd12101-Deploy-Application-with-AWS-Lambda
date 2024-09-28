@@ -4,7 +4,7 @@ import AWSXRay from 'aws-xray-sdk'
 const XAWS = AWSXRay.captureAWS(AWS);
 const dynamoDB = new XAWS.DynamoDB.DocumentClient();
 
-export class TodoRepository {
+export class TodoDataLayer {
 
     async getTodos(userId) {
         const result = await dynamoDB.query({

@@ -1,6 +1,6 @@
 import { createLogger } from '../../utils/logger.mjs'
 import { getUserId } from '../utils.mjs'
-import { createTodo } from "../../service/TodoService.js"
+import { createTodo } from "../../businessLogic/TodoBusinessLogic.js"
 
 
 const logger = createLogger('createTodo')
@@ -9,7 +9,7 @@ export async function handler(event) {
   const userId = getUserId(event)
   const result = await createTodo(userId, body)
 
-  logger.info(`${newTodo.name} created successfully`);
+  logger.info(`${result.name} created successfully`);
 
   return {
       statusCode: 201,

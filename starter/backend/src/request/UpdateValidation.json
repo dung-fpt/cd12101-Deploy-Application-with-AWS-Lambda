@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+
+  "type": "object",
+
+  "title": "Update Todo Request Validation",
+  "required": [
+    "name",
+    "dueDate",
+    "done"
+  ],
+  "properties": {
+    "name":{
+      "type": "string"
+    },
+    "dueDate": {
+      "type": "string"
+    },
+    "done": {
+      "type": "boolean"
+    }
+  }
+}
